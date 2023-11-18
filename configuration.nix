@@ -11,6 +11,7 @@
       ./keyd.nix
       ./neovim.nix
       ./tmux.nix
+      ./zoxide.nix
     ];
 
   # Bootloader.
@@ -88,7 +89,7 @@
   nixpkgs.config.allowUnfree = true;
 
   # List packages installed in system profile.
-  environment.systemPackages = with pkgs; [  ];
+  environment.systemPackages = with pkgs; [ ];
 
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
