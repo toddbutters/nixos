@@ -18,6 +18,7 @@
     extraConfig = ''
       set -g display-time 4000
       set -g focus-events on
+      set -g mouse on
       set -g status-interval 5
       set -g status-position top
       set -g status-keys emacs
