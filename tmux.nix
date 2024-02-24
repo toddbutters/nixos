@@ -14,6 +14,7 @@
     plugins = with pkgs; [
       tmuxPlugins.catppuccin
       tmuxPlugins.tilish
+      tmuxPlugins.extrakto
     ];
     extraConfig = ''
       set -g display-time 4000
@@ -27,6 +28,8 @@
       unbind -T copy-mode-vi Enter; #Default for copy-selection
       bind -T copy-mode-vi v send-keys -X begin-selection
       bind -T copy-mode-vi y send-keys -X copy-selection
+
+      set -g @extrakto_clip_tool wl-copy
     '';
   };
 }
