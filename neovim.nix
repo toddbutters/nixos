@@ -3,13 +3,20 @@
 {
   programs.neovim = {
     enable = true;
-    defaultEditor = true;
     configure = {
-      customRC = ''
-      set clipboard=unnamedplus
-      set number
-      set relativenumber
-      '';
+	customRC = ''
+	  set number
+	  set relativenumber
+	  set cc=80
+	  set list
+	  set listchars=tab:→\ ,space:·,nbsp:␣,trail:•,precedes:«,extends:»
+	  if &diff
+	    colorscheme blue
+	  endif
+        '';
+      packages.myVimPackage = with pkgs.vimPlugins; {
+	start = [ ctrlp ];
+      };
     };
   };
 }
