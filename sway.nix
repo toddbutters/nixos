@@ -16,6 +16,14 @@ let
       dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
       systemctl --user stop pipewire pipewire-media-session xdg-desktop-portal xdg-desktop-portal-wlr
       systemctl --user start pipewire pipewire-media-session xdg-desktop-portal xdg-desktop-portal-wlr
+      # Brightness
+      bindsym XF86MonBrightnessDown exec light -U 10
+      bindsym XF86MonBrightnessUp exec light -A 10
+
+      # Volume
+      bindsym XF86AudioRaiseVolume exec 'pactl set-sink-volume @DEFAULT_SINK@ +1%'
+      bindsym XF86AudioLowerVolume exec 'pactl set-sink-volume @DEFAULT_SINK@ -1%'
+      bindsym XF86AudioMute exec 'pactl set-sink-mute @DEFAULT_SINK@ toggle
     '';
   };
 
@@ -42,7 +50,6 @@ let
 in
 {
   environment.systemPackages = with pkgs; [
-    alacritty # gpu accelerated terminal
     dbus   # make dbus-update-activation-environment available in the path
     dbus-sway-environment
     configure-gtk
@@ -87,4 +94,6 @@ in
     enable = true;
     wrapperFeatures.gtk = true;
   };
+
+  programs.waybar.enable = true;
 }
