@@ -23,7 +23,17 @@ I think this is my chance to change that and maybe even reach inner peace.
 This might work.
 
 1. Install NixOS
-1. Log in and clone `nixos` repo to home or wherever.
-1. Copy hardware config if needed. `cp /etc/nixos/hardware-configuration.nix ~/nixos/`
-1. Build and switch to new config. `sudo nixos-rebuild switch -I nixos-config="~/nixos/configuration.nix"`
+1. Log in and clone `nixos` repo to home or someone it can be edited without
+root priveleges.
+1. Copy hardware config if needed.
+
+    `cp /etc/nixos/hardware-configuration.nix ~/nixos/`
+
+1. Or generate a new hardware config.
+
+    `nixos-generate-config --dir ~/nixos/`
+
+1. Build and switch to new config.
+
+    `sudo nixos-rebuild switch -I nixos-config="~/nixos/configuration.nix"`
 
