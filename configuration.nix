@@ -3,15 +3,21 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }:
-
 {
-  imports =
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./atuin.nix
+      ./direnv.nix
+      ./distrobox.nix
+      ./flatpak.nix
+      ./gnome.nix
       ./keyd.nix
       ./neovim.nix
+      ./sway.nix
+      ./tailscale.nix
       ./tmux.nix
+      ./users.nix
       ./zoxide.nix
     ];
 
@@ -43,17 +49,14 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
+  # Enable touchpad support (enabled default in most desktopManager).
+  services.libinput.enable = true;
 
-  # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-
-  # Configure keymap in X11
+  # Enable the X11 windowing system and configure keymap in X11
   services.xserver = {
-    layout = "us";
-    xkbVariant = "";
+    enable = true;
+    xkb.layout = "us";
+    xkb.variant = "";
   };
 
   # Enable CUPS to print documents.
@@ -68,22 +71,7 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    #jack.enable = true;
-  };
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  services.xserver.libinput.enable = true;
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.todd = {
-    isNormalUser = true;
-    description = "todd";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-      curl
-      firefox
-      git
-    ];
+    jack.enable = true;
   };
 
   # Allow unfree packages
